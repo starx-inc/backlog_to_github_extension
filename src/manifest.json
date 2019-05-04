@@ -1,5 +1,5 @@
 {
-  "name": "Chrome Extension Webpack",
+  "name": "Backlog To Chrome Extension",
   "options_page": "options.html",
   "background": {
     "page": "background.html"
@@ -11,6 +11,14 @@
   "icons": {
     "128": "icon-128.png"
   },
+  "content_scripts": [
+    {
+      "matches": ["https://*.backlog.com/find/*"],
+      "js": [
+        "contentscript.bundle.js"
+      ]
+    }
+  ],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

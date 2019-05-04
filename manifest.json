@@ -1,0 +1,27 @@
+{
+  "name": "From Backlog to Github",
+  "version": "1.0",
+  "description": "Build an Extension!",
+  "permissions": ["storage", "activeTab"],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/minion.png"
+    }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://starx.backlog.com/find/*"],
+      "css": ["styles/myStyles.css"],
+      "js": [
+        "js/jquery.min.js",
+        "js/contentScript.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/minion.png"
+  },
+  "manifest_version": 2
+}
