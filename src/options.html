@@ -2,8 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
   <title></title>
 </head>
 <body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <form>
+          <div class="form-group">
+            <label for="githubTemplate">Your github's issue template</label>
+            <textarea class="form-control" id="githubTemplate" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-6">
+        <form>
+          <div class="form-group">
+            <label for="previewGithubTemplate">Your github's issue template</label>
+            <div id="previewGithubTemplate" class="markdown-body" rows="3" readonly="true"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

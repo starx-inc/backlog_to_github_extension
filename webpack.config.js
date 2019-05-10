@@ -50,7 +50,9 @@ var options = {
     ]
   },
   resolve: {
-    alias: alias
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   plugins: [
     // clean the build folder

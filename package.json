@@ -7,6 +7,7 @@
     "start": "node utils/webserver.js"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "2.1.0",
@@ -22,7 +23,10 @@
     "write-file-webpack-plugin": "4.5.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "document-ready": "^2.0.2",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "showdown": "^1.9.0",
+    "vue": "^2.6.10"
   }
 }

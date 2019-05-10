@@ -1,4 +1,3 @@
-console.log("dddd 22")
 var ready = require('document-ready')
 var $ = require('jQuery')
 const NEWLINE = "%0A"
@@ -17,16 +16,13 @@ ready(function () {
     // Create button
     var githubLink = document.createElement('a');
     var brTag = document.createElement('br');
-    githubLink.innerHTML = "New Github Issue"
+    githubLink.innerHTML = "To Github"
     githubLink.setAttribute('class', 'button button--primary github')
     githubLink.setAttribute('href', 'javascript:void(0)')
 
     var title = `[${issueTypeTd.innerText}]` + issueSummaryTd.innerText
     var body = `%23%23%23%20Backlog URL` + NEWLINE
     body += `- [${issueKey}](${hostWithProtocol}/view/${issueKey})` + NEWLINE
-    body += '| TH1 | TH2 |' + NEWLINE
-    body += '----|---- ' + NEWLINE
-    body += '| TD2 | TD4 |' + NEWLINE
 
     githubLink.onclick = function(event){
       window.open(`https://github.com/starx-inc/bee-cloud/issues/new?title=${title}&body=${body}`)
