@@ -10,18 +10,26 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
+        <h2>Input your template</h2>
         <form>
           <div class="form-group">
-            <label for="githubTemplate">Your github's issue template</label>
-            <textarea class="form-control" id="githubTemplate" rows="3"></textarea>
+            <div class="">
+              <label for="githubTitle">Github Title</label>
+              <input type="text" id="githubTitle" class="form-control">
+            </div>
+            <label for="githubBody">Github Body</label>
+            <textarea class="form-control" id="githubBody" rows="3"></textarea>
           </div>
         </form>
       </div>
       <div class="col-sm-6">
+        <h2>Preview</h2>
         <form>
           <div class="form-group">
-            <label for="previewGithubTemplate">Your github's issue template</label>
-            <div id="previewGithubTemplate" class="markdown-body" rows="3" readonly="true"></div>
+            <label>Title</label>
+            <div id="previewGithubTitle" class="form-control" rows="3" readonly="true"></div>
+            <label>Body</label>
+            <div id="previewGithubBody" class="markdown-body form-control" rows="3" readonly="true"></div>
           </div>
         </form>
       </div>

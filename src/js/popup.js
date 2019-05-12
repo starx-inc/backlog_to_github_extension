@@ -12,4 +12,5 @@ ready(function () {
       console.log('Value is set to ' + event.target.value)
     })
   })
+  $('#option_page').attr("href", chrome.extension.getURL('options.html'))
 })
