@@ -1,31 +1,65 @@
-var ready = require('document-ready')
-var $ = require('jQuery')
-const NEWLINE = "%0A"
+import { NEWLINE, GITHUB_URL_KEY, GITHUB_TITLE_KEY, GITHUB_BODY_KEY, GITHUB_TITLE_TEMPLATE,
+  GITHUB_BODY_TEMPLATE, NAME_ID_MAPPING, SPECIAL_CHAR_MAPPING, BREAKLINE } from '../constants'
+import _ from 'lodash'
+
+let ready = require('document-ready')
+let $ = require('jQuery')
 
 ready(function () {
-  var targetTrs = $("#issues-table tbody tr")
-  var hostWithProtocol = location.protocol + '//'+ location.hostname
+  let targetTrs = $("#issues-table tbody tr")
 
-  for (var i = 0; i < targetTrs.length; i++) {
+  function findInnerTextByColumnName(tr, colName) {
+    let element = $(tr).children("td[data-column-name='" + colName + "']")[0]
+    if (element) {
+      return element.innerText
+    }
+    return '';
+  }
+
+  function convertToText(markdownFormat, tr) {
+    let result = markdownFormat
+    _.each(_.keys(NAME_ID_MAPPING), function(keyName) {
+      let nameWithQuote = "`" + keyName + "`"
+      if (markdownFormat.indexOf(nameWithQuote) != -1) {
+        let innerText = findInnerTextByColumnName(tr, NAME_ID_MAPPING[keyName])
+        result = _.replace(result, new RegExp(nameWithQuote, 'g'), innerText)
+      }
+    })
+    return result;
+  }
+
+  function replaceSpecialChar(input) {
+    let result = input
+    _.each(_.keys(SPECIAL_CHAR_MAPPING), function(keyName) {
+      result = _.replace(result, new RegExp(keyName, 'g'), SPECIAL_CHAR_MAPPING[keyName])
+    })
+    return result;
+  }
+
+  for (let i = 0; i < targetTrs.length; i++) {
     // Find td
-    var issueTypeTd = $(targetTrs[i]).children("td[data-column-name='issueType']")[0]
-    var issueKeyTd = $(targetTrs[i]).children("td[data-column-name='issueKey']")[0]
-    var issueSummaryTd = $(targetTrs[i]).children("td[data-column-name='summary']")[0]
-    var issueKey =  $(issueKeyTd).children('a')[0].innerText
+    let issueTypeTd = $(targetTrs[i]).children("td[data-column-name='issueType']")[0]
+    let issueKeyTd = $(targetTrs[i]).children("td[data-column-name='issueKey']")[0]
+    let issueSummaryTd = $(targetTrs[i]).children("td[data-column-name='summary']")[0]
+    let issueKey =  $(issueKeyTd).children('a')[0].innerText
 
     // Create button
-    var githubLink = document.createElement('a');
-    var brTag = document.createElement('br');
+    let githubLink = document.createElement('a');
+    let brTag = document.createElement('br');
     githubLink.innerHTML = "To Github"
     githubLink.setAttribute('class', 'button button--primary github')
     githubLink.setAttribute('href', 'javascript:void(0)')
 
-    var title = `[${issueTypeTd.innerText}]` + issueSummaryTd.innerText
-    var body = `%23%23%23%20Backlog URL` + NEWLINE
-    body += `- [${issueKey}](${hostWithProtocol}/view/${issueKey})` + NEWLINE
-
     githubLink.onclick = function(event){
-      window.open(`https://github.com/starx-inc/bee-cloud/issues/new?title=${title}&body=${body}`)
+      chrome.storage.sync.get([GITHUB_URL_KEY, GITHUB_TITLE_KEY, GITHUB_BODY_KEY], function(result){
+        let url = result[GITHUB_URL_KEY]
+        let title = result[GITHUB_TITLE_KEY] || GITHUB_TITLE_TEMPLATE
+        let body = result[GITHUB_BODY_KEY] || GITHUB_BODY_TEMPLATE
+
+        title = replaceSpecialChar(convertToText(title, targetTrs[i]))
+        body = replaceSpecialChar(convertToText(body, targetTrs[i]))
+        window.open(`${url}/issues/new?title=${title}&body=${body}`)
+      })
     }
 
     issueKeyTd.appendChild(brTag)
