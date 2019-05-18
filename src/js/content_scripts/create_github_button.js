@@ -11,6 +11,9 @@ ready(function () {
   function findInnerTextByColumnName(tr, colName) {
     let element = $(tr).children("td[data-column-name='" + colName + "']")[0]
     if (element) {
+      if (colName == 'priority') {
+        return $($(element).children("span")[0]).data('tooltip');
+      }
       return element.innerText
     }
     return '';

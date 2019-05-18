@@ -20,7 +20,18 @@ export const NAME_ID_MAPPING =
     "件名": "summary",
     "担当者": "assignee",
     "状態": "status",
-    "優先度": "priority"
+    "優先度": "priority",
+    "カテゴリー": "category",
+    "発生バージョン": "version",
+    "マイルストーン": "milestone",
+    "登録日": "created",
+    "開始日": "startDate",
+    "期限日": "dueDate",
+    "予定時間": "estimatedHours",
+    "実績時間": "actualHours",
+    "更新日": "updated",
+    "登録者":"createdUser",
+    "共有": "sharedFiles"
   }
 
 export const SPECIAL_CHAR_MAPPING =
