@@ -85,10 +85,10 @@ ready(function () {
 
   // 詳細
   if (window.location.pathname.indexOf('view') != -1) {
-    let targetDiv = $('.ticket__key')[0]
+    let targetDiv = $('.copy-key-btn')[0]
 
     let githubButton = document.createElement('button');
-    githubButton.setAttribute('class', 'button button--primary')
+    githubButton.setAttribute('class', 'button button--primary detail_page')
     githubButton.innerText = "To Github"
     targetDiv.appendChild(githubButton)
 
