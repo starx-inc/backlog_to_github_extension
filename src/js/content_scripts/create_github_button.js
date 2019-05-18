@@ -38,7 +38,6 @@ ready(function () {
   }
 
   function onTableChange() {
-    console.log("Fffff");
     let targetTrs = $("#issues-table tbody tr")
     for (let i = 0; i < targetTrs.length; i++) {
       // Find td
@@ -72,13 +71,37 @@ ready(function () {
 
   // observer
   let target = document.getElementById("issues-table");
-  let observere = new MutationObserver((mutations) => {
-    onTableChange();
-  });
-  let config = {
-    characterData: true,
-    childList: true
-  };
+  if (target) {
+    let observere = new MutationObserver((mutations) => {
+      onTableChange();
+    });
+    let config = {
+      characterData: true,
+      childList: true
+    };
 
-  observere.observe(target, config);
+    observere.observe(target, config);
+  }
+
+  // 詳細
+  if (window.location.pathname.indexOf('view') != -1) {
+    let targetDiv = $('.ticket__key')[0]
+
+    let githubButton = document.createElement('button');
+    githubButton.setAttribute('class', 'button button--primary')
+    githubButton.innerText = "To Github"
+    targetDiv.appendChild(githubButton)
+
+    githubButton.onclick = function() {
+      let ticket = window.location.pathname.split('/view/')[1]
+      let project = ticket.split('-')[0]
+
+      let newWindow = window.open(`${window.location.origin}/find/${project}?condition.query=${ticket}&to_github_issue=true`)
+    }
+  }
+
+  if (window.location.search.indexOf('to_github_issue') != -1) {
+    $('.github_issue')[0].click();
+    window.close();
+  }
 })
