@@ -45,9 +45,7 @@ ready(function () {
 
     // Create button
     let githubLink = document.createElement('a');
-    let brTag = document.createElement('br');
-    githubLink.innerHTML = "To Github"
-    githubLink.setAttribute('class', 'button button--primary github')
+    githubLink.setAttribute('class', 'button button--primary github_issue')
     githubLink.setAttribute('href', 'javascript:void(0)')
 
     githubLink.onclick = function(event){
@@ -62,7 +60,6 @@ ready(function () {
       })
     }
 
-    issueKeyTd.appendChild(brTag)
     issueKeyTd.appendChild(githubLink)
   }
 })

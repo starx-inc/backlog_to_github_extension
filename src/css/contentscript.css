@@ -1,0 +1,6 @@
+.github_issue::before {
+  content: "To Github"
+}
+.github_issue {
+  display: block;
+}
